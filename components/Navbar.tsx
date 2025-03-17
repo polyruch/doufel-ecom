@@ -77,10 +77,6 @@ export function Navbar() {
 
           {/* Search and cart */}
           <div className="flex items-center space-x-4">
-            <button aria-label="Search" className="text-neutral-800">
-              <Search className="h-5 w-5" />
-            </button>
-
             {/* Cart component */}
             <Cart />
           </div>
