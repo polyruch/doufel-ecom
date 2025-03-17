@@ -1,13 +1,32 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono, Marcellus } from "next/font/google";
+import {
+  Cormorant_Garamond,
+  Geist,
+  Geist_Mono,
+  Marcellus,
+  Playfair_Display,
+} from "next/font/google";
 import "./globals.css";
 import Footer from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
 import { CartProvider } from "@/contexts/CartContext";
+import { cn } from "@/lib/utils";
 
 const marcellus = Marcellus({
   weight: "400",
   subsets: ["latin"],
+});
+
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-playfair",
+});
+
+// Load Cormorant Garamond font
+const cormorant = Cormorant_Garamond({
+  subsets: ["latin"],
+  weight: ["300", "400", "500"],
+  variable: "--font-cormorant",
 });
 
 export const metadata = {
@@ -23,11 +42,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${marcellus.className} font-serif  antialiased  flex flex-col min-h-screen border-2 `}
+        className={`${marcellus.className} {playfair.variable} ${cormorant.variable} font-serif  antialiased  flex flex-col min-h-screen `}
       >
         <CartProvider>
-          <Navbar />
-          <main className="flex-grow">{children}</main>
+          <div className="relative z-10 flex flex-col min-h-screen">
+            <Navbar />
+            <main className="flex-grow">{children}</main>
+          </div>
           <Footer />
         </CartProvider>
       </body>

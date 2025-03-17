@@ -28,7 +28,7 @@ const Banner = () => {
   }, []);
 
   return (
-    <div className="relative h-[25vh] min-h-[200px] sm:min-h-[400px] w-full overflow-hidden">
+    <div className="relative h-[25vh] min-h-[200px] sm:min-h-[400px] w-full overflow-hidden ">
       {isLoading ? (
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="w-12 h-12 border-4 border-pink-200 border-t-pink-500 rounded-full animate-spin"></div>
