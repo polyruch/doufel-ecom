@@ -1,5 +1,4 @@
 "use client";
-ç;
 import { getProduct } from "@/utils/axiosClient";
 import { useEffect, useState } from "react";
 import * as React from "react";
@@ -10,6 +9,7 @@ import Link from "next/link";
 import { useCart } from "@/contexts/CartContext";
 import {
   Carousel,
+  CarouselApi,
   CarouselContent,
   CarouselItem,
   CarouselNext,
