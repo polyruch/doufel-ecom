@@ -1,7 +1,5 @@
 import {
   Cormorant_Garamond,
-  Geist,
-  Geist_Mono,
   Marcellus,
   Playfair_Display,
 } from "next/font/google";
@@ -9,7 +7,6 @@ import "./globals.css";
 import Footer from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
 import { CartProvider } from "@/contexts/CartContext";
-import { cn } from "@/lib/utils";
 
 const marcellus = Marcellus({
   weight: "400",
@@ -42,7 +39,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${marcellus.className} {playfair.variable} ${cormorant.variable} font-serif  antialiased  flex flex-col min-h-screen `}
+        className={`${marcellus.className} ${playfair.variable} ${cormorant.variable} font-serif  antialiased  flex flex-col min-h-screen `}
       >
         <CartProvider>
           <div className="relative z-10 flex flex-col min-h-screen">

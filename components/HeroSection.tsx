@@ -13,7 +13,7 @@ export default function HeroSection() {
           Will satisfy you no matter your style, we provide for you high quality
           unique models to make sure you&apos;ll shine!
         </p>
-        <Link href="/new-collection">
+        <Link href="/products">
           <Button className="font-sans bg-pink-700 rounded-none" size="lg">
             SHOP NOW
           </Button>

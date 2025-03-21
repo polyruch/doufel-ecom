@@ -1,4 +1,4 @@
-const { default: axios } = require("axios");
+import axios from "axios";
 
 const apiKey = process.env.NEXT_PUBLIC_REST_API_KEY;
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;
@@ -31,6 +31,16 @@ export async function getProducts() {
     return response.data;
   } catch (error) {
     console.error("Error fetching products:", error);
+    throw error;
+  }
+}
+
+export async function getProduct(id: string) {
+  try {
+    const response = await api.get(`/products/${id}?populate=*`);
+    return response.data.data;
+  } catch (error) {
+    console.error("Error fetching product:", error);
     throw error;
   }
 }

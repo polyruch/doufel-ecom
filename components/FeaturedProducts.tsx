@@ -44,7 +44,6 @@ export default function FeaturedProducts({ title }: { title: string }) {
                 old_price: product.price * 2,
                 isNew: true,
               }))
-              .slice(-2)
               .reverse()
           );
         }
@@ -59,20 +58,32 @@ export default function FeaturedProducts({ title }: { title: string }) {
   }, []);
 
   return (
-    <section className="py-12 px-4 md:px-6">
+    <section className="pt-10 px-4 md:px-6 bg-gray-50 ">
       <div className="container mx-auto">
-        <div className="flex items-center justify-between mb-8">
-          <h2 className="text-xl font-light tracking-wide uppercase">
+        <div className="flex items-center justify-between mb-10">
+          <h2 className="text-2xl font-light tracking-wide uppercase relative after:content-[''] after:absolute after:w-12 after:h-0.5 after:bg-pink-700 after:-bottom-3 after:left-0">
             {title}
           </h2>
           <Link
-            href={"/hello"}
-            className="flex items-center text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+            href={"/products"}
+            className="flex items-center text-sm font-medium text-pink-700 hover:text-pink-900 transition-colors group"
           >
             View all
-            <ChevronRight className="ml-1 h-4 w-4" />
+            <ChevronRight className="ml-1 h-4 w-4 group-hover:translate-x-1 transition-transform" />
           </Link>
         </div>
+
+        {isLoading && (
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-8">
+            {[1, 2, 3, 4].map((item) => (
+              <div key={item} className="space-y-3">
+                <div className="aspect-square bg-gray-200 rounded-lg animate-pulse"></div>
+                <div className="h-4 bg-gray-200 rounded animate-pulse"></div>
+                <div className="h-4 w-2/3 bg-gray-200 rounded animate-pulse"></div>
+              </div>
+            ))}
+          </div>
+        )}
 
         <Carousel
           opts={{
@@ -92,9 +103,9 @@ export default function FeaturedProducts({ title }: { title: string }) {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <div className="flex justify-end gap-2 mt-4">
-            <CarouselPrevious className="static transform-none" />
-            <CarouselNext className="static transform-none" />
+          <div className="flex justify-end gap-2 mt-6">
+            <CarouselPrevious className="static transform-none h-9 w-9 rounded-full border-pink-200 text-pink-700 hover:bg-pink-50" />
+            <CarouselNext className="static transform-none h-9 w-9 rounded-full border-pink-200 text-pink-700 hover:bg-pink-50" />
           </div>
         </Carousel>
       </div>

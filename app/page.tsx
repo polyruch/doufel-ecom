@@ -1,4 +1,5 @@
 import Banner from "@/components/Banner";
+import FaqSection from "@/components/Faq";
 import FeaturedProducts from "@/components/FeaturedProducts";
 import HeroSection from "@/components/HeroSection";
 import TextSlider from "@/components/TextSlider";
@@ -11,6 +12,8 @@ export default function Home() {
         <HeroSection />
         <TextSlider />
         <FeaturedProducts title="Featured Products" />
+        {/* <CallToAction /> */}
+        <FaqSection />
       </div>
     </div>
   );
