@@ -1,6 +1,6 @@
 "use client";
 import { getProduct } from "@/utils/axiosClient";
-import { useEffect, useState } from "react";
+import { useEffect, useState, use } from "react";
 import * as React from "react";
 import { Button } from "@/components/ui/button";
 import { Minus, Plus, ShoppingBag } from "lucide-react";
@@ -15,6 +15,8 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import ColorPicker from "@/components/ui/colorPicker";
+import QuantitySelector from "@/components/ui/quantitySelector";
 
 interface ProductData {
   id: string;
@@ -34,10 +36,13 @@ export default function ProductPage({ params }: { params: { id: string } }) {
   const { addItem } = useCart();
   const [carouselApi, setCarouselApi] = React.useState<CarouselApi>();
 
+  // @ts-ignore
+  const { id } = use(params);
+  console.log(product?.colors);
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await getProduct(params.id);
+        const response = await getProduct(id);
         setProduct({
           id: response?.id || "",
           name: response?.title || "Untitled Product",
@@ -59,8 +64,8 @@ export default function ProductPage({ params }: { params: { id: string } }) {
       }
     };
 
-    if (params.id) fetchProduct();
-  }, [params.id]);
+    if (id) fetchProduct();
+  }, [id]);
 
   // Update current slide when carousel changes
   React.useEffect(() => {
@@ -162,10 +167,6 @@ export default function ProductPage({ params }: { params: { id: string } }) {
                   />
                 ))}
               </div>
-              <div className="flex gap-2">
-                <CarouselPrevious className="h-9 w-9 rounded-full border-black text-black hover:bg-black" />
-                <CarouselNext className="h-9 w-9 rounded-full border-black text-black hover:bg-black" />
-              </div>
             </div>
           </Carousel>
         </div>
@@ -192,50 +193,19 @@ export default function ProductPage({ params }: { params: { id: string } }) {
 
           {/* Color Selection */}
           {product.colors && product.colors.length > 0 && (
-            <div>
-              <h3 className="text-sm font-medium mb-3">Color</h3>
-              <div className="flex flex-wrap gap-2">
-                {product.colors.map((color) => (
-                  <button
-                    key={color}
-                    onClick={() => setSelectedColor(color)}
-                    className={`w-8 h-8 rounded-full border ${
-                      selectedColor === color
-                        ? "ring-2 ring-pink-700 ring-offset-2"
-                        : "border-gray-300"
-                    }`}
-                    style={{ backgroundColor: color }}
-                    aria-label={`Select ${color} color`}
-                  />
-                ))}
-              </div>
-            </div>
+            <ColorPicker
+              productColors={product.colors}
+              setSelectedColor={setSelectedColor}
+              selectedColor={selectedColor}
+            />
           )}
 
           {/* Quantity Selector */}
-          <div>
-            <h3 className="text-sm font-medium mb-3">Quantity</h3>
-            <div className="flex items-center border border-gray-300 rounded-md w-fit">
-              <button
-                onClick={decrementQuantity}
-                className="px-3 py-2 text-gray-600 hover:text-pink-700 transition-colors"
-                aria-label="Decrease quantity"
-              >
-                <Minus className="h-4 w-4" />
-              </button>
-              <span className="px-4 py-2 text-center min-w-[3rem]">
-                {quantity}
-              </span>
-              <button
-                onClick={incrementQuantity}
-                className="px-3 py-2 text-gray-600 hover:text-pink-700 transition-colors"
-                aria-label="Increase quantity"
-              >
-                <Plus className="h-4 w-4" />
-              </button>
-            </div>
-          </div>
-
+          <QuantitySelector
+            decrementQuantity={decrementQuantity}
+            incrementQuantity={incrementQuantity}
+            quantity={quantity}
+          />
           {/* Add to Cart Button */}
           <Button
             onClick={handleAddToCart}
