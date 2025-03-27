@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { X, Minus, Plus } from "lucide-react";
+import { X, Minus, Plus, WholeWord } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
 import {
   DropdownMenu,
@@ -112,12 +112,14 @@ export function Cart() {
               </div>
 
               <div className="flex flex-col gap-2">
-                <button
-                  className="w-full bg-[#5a8575] hover:bg-[#4a7265] text-white py-3 rounded-none"
-                  onClick={() => setIsOpen(false)}
-                >
-                  Checkout
-                </button>
+                <Link href="/checkout" className="w-full">
+                  <button
+                    className="w-full bg-[#5a8575] hover:bg-[#4a7265] text-white py-3 rounded-none"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    Checkout
+                  </button>
+                </Link>
                 <Link href="/cart" className="w-full">
                   <button
                     className="w-full border border-neutral-200 hover:bg-neutral-50 py-3"

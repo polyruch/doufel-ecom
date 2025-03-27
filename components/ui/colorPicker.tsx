@@ -15,10 +15,15 @@ const ColorPicker = ({
             onClick={() => setSelectedColor(color)}
             className={`w-8 h-8 rounded-full border ${
               selectedColor === color
-                ? "ring-2 ring-pink-700 ring-offset-2"
+                ? "ring-2 ring-offset-2"
                 : "border-gray-300"
             }`}
-            style={{ backgroundColor: color.color }}
+            style={{
+              backgroundColor: color.color,
+              ...(selectedColor === color && {
+                boxShadow: `0 0 0 2px white, 0 0 0 4px ${color.color}`,
+              }),
+            }}
             aria-label={`Select ${color} color`}
           />
         ))}

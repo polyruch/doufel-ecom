@@ -35,10 +35,12 @@ export default function ProductPage({ params }: { params: { id: string } }) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const { addItem } = useCart();
   const [carouselApi, setCarouselApi] = React.useState<CarouselApi>();
+  const [selectedSize, setSelectedSize] = useState<string>("");
+
+  const sizes = ["36 a 40", "40 a 44"];
 
   // @ts-ignore
   const { id } = use(params);
-  console.log(product?.colors);
   useEffect(() => {
     const fetchProduct = async () => {
       try {
@@ -92,6 +94,8 @@ export default function ProductPage({ params }: { params: { id: string } }) {
         price: product.price,
         quantity: quantity,
         image: product.images[0] || "/placeholder.svg",
+        size: selectedSize,
+        color: selectedColor,
       });
     }
   };
@@ -190,7 +194,21 @@ export default function ProductPage({ params }: { params: { id: string } }) {
           <div className="prose prose-sm max-w-none">
             <p>{product.description}</p>
           </div>
-
+          {/* Size Selection */}
+          <div className="border-2 border-black rounded-md p-4">
+            <select
+              id="size"
+              value={selectedSize}
+              onChange={(e) => setSelectedSize(e.target.value)}
+            >
+              <option value="">Choisir Une Taille</option>
+              {sizes.map((size) => (
+                <option key={size} value={size}>
+                  {size}
+                </option>
+              ))}
+            </select>
+          </div>
           {/* Color Selection */}
           {product.colors && product.colors.length > 0 && (
             <ColorPicker
@@ -210,6 +228,10 @@ export default function ProductPage({ params }: { params: { id: string } }) {
           <Button
             onClick={handleAddToCart}
             className="w-full md:w-auto px-8 py-6 bg-pink-700 hover:bg-pink-800 text-white mt-6 flex items-center justify-center gap-2"
+            disabled={
+              !selectedColor ||
+              (selectedSize !== "36 a 40" && selectedSize !== "40 a 44")
+            }
           >
             <ShoppingBag className="h-5 w-5" />
             Add to Cart
@@ -221,7 +243,7 @@ export default function ProductPage({ params }: { params: { id: string } }) {
               <div>
                 <h4 className="font-medium mb-1">Shipping</h4>
                 <p className="text-gray-600">
-                  Free shipping on orders over $100
+                  Livraison gratuite pour les commandes plus de 5000da
                 </p>
               </div>
               <div>

@@ -1,5 +1,4 @@
 "use client";
-
 import { createContext, useState, useContext, ReactNode } from "react";
 
 export type CartItem = {
@@ -8,6 +7,8 @@ export type CartItem = {
   price: number;
   quantity: number;
   image: string;
+  color?: string;
+  size?: string;
 };
 
 type CartContextType = {
@@ -23,17 +24,7 @@ type CartContextType = {
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export function CartProvider({ children }: { children: ReactNode }) {
-  const [items, setItems] = useState<CartItem[]>([
-    // Initial example item
-    {
-      id: "1",
-      name: "Casual Hijab",
-      price: 49.99,
-      quantity: 2,
-      image:
-        "https://mrsmokiestyle.home.blog/wp-content/uploads/2021/03/hijab-black.jpg?w=683",
-    },
-  ]);
+  const [items, setItems] = useState<CartItem[]>([]);
 
   const addItem = (item: CartItem) => {
     setItems((prevItems) => {
