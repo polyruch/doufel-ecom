@@ -27,10 +27,10 @@ export function Navbar() {
             <Link href="/" className="flex items-center">
               <span className="sr-only">DOUFEL collection</span>
               <div className="relative">
-                <span className="font-serif text-[#5a8575] text-3xl tracking-wide">
+                <span className="font-serif text-pink-700 text-3xl tracking-wide">
                   DOUFEL
                 </span>
-                <span className="block text-[#5a8575] text-xs tracking-wide text-center mt-[-2px]">
+                <span className="block text-pink-800 text-xs tracking-wide text-center mt-[-2px]">
                   collection
                 </span>
               </div>

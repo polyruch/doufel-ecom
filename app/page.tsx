@@ -11,7 +11,7 @@ export default function Home() {
       <div className="relative z-10 flex flex-col min-h-screen">
         <HeroSection />
         <TextSlider />
-        <FeaturedProducts title="Featured Products" />
+        <FeaturedProducts title="Nouveautés" />
         {/* <CallToAction /> */}
         <FaqSection />
       </div>

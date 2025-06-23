@@ -1,4 +1,5 @@
 "use client";
+import { Metadata } from "next";
 import { getProduct } from "@/utils/axiosClient";
 import { useEffect, useState, use } from "react";
 import * as React from "react";
@@ -6,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Minus, Plus, ShoppingBag } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useCart } from "@/contexts/CartContext";
 import {
   Carousel,
@@ -25,6 +27,53 @@ interface ProductData {
   description: string;
   images: string[];
   colors: string[];
+  old_price: number;
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { id: string };
+}): Promise<Metadata> {
+  try {
+    const product = await getProduct(params.id);
+    const productImage = product.banner?.url || "/product-placeholder.jpg";
+
+    return {
+      title: `${product.title} | Dfl-collection Boutique`,
+      description:
+        product.description?.[0]?.children?.[0]?.text ||
+        "Découvrez ce produit unique de notre collection.",
+      openGraph: {
+        title: `${product.title} | Dfl-collection Boutique`,
+        description:
+          product.description?.[0]?.children?.[0]?.text ||
+          "Découvrez ce produit unique de notre collection.",
+        images: [
+          {
+            url: productImage,
+            width: 1200,
+            height: 630,
+            alt: product.title,
+          },
+        ],
+      },
+      twitter: {
+        card: "summary_large_image",
+        title: `${product.title} | Dfl-collection Boutique`,
+        description:
+          product.description?.[0]?.children?.[0]?.text ||
+          "Découvrez ce produit unique de notre collection.",
+        images: productImage,
+      },
+    };
+  } catch (error) {
+    return {
+      title: "Produit | Dfl-collection Boutique",
+      description:
+        "Découvrez notre collection de vêtements modernes pour femmes.",
+    };
+  }
 }
 
 export default function ProductPage({ params }: { params: { id: string } }) {
@@ -36,6 +85,7 @@ export default function ProductPage({ params }: { params: { id: string } }) {
   const { addItem } = useCart();
   const [carouselApi, setCarouselApi] = React.useState<CarouselApi>();
   const [selectedSize, setSelectedSize] = useState<string>("");
+  const router = useRouter();
 
   const sizes = ["36 a 40", "40 a 44"];
 
@@ -58,6 +108,7 @@ export default function ProductPage({ params }: { params: { id: string } }) {
               []),
           ].filter(Boolean),
           colors: response?.colors || [],
+          old_price: response?.old_price || 0,
         });
       } catch (error) {
         console.error("Error fetching product:", error);
@@ -97,6 +148,22 @@ export default function ProductPage({ params }: { params: { id: string } }) {
         size: selectedSize,
         color: selectedColor,
       });
+    }
+  };
+
+  const handleBuyNow = () => {
+    if (product) {
+      addItem({
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        quantity: quantity,
+        image: product.images[0] || "/placeholder.svg",
+        size: selectedSize,
+        color: selectedColor,
+      });
+      // Redirect to checkout page
+      router.push("/checkout");
     }
   };
 
@@ -181,12 +248,10 @@ export default function ProductPage({ params }: { params: { id: string } }) {
             <h1 className="text-3xl font-light tracking-wide">
               {product.name}
             </h1>
-            <div className="flex items-center gap-3 mt-2">
-              <p className="text-2xl font-medium">
-                ${product.price.toFixed(2)}
-              </p>
+            <div className="flex items-center gap-3 mt-2 font-sans">
+              <p className="text-2xl font-medium">{product.price} DA</p>
               <p className="text-sm text-muted-foreground line-through">
-                ${(product.price * 1.3).toFixed(2)}
+                {product.old_price} DA
               </p>
             </div>
           </div>
@@ -234,7 +299,18 @@ export default function ProductPage({ params }: { params: { id: string } }) {
             }
           >
             <ShoppingBag className="h-5 w-5" />
-            Add to Cart
+            Ajouter au panier
+          </Button>
+          <Button
+            onClick={handleBuyNow}
+            className="w-full md:w-auto px-8 py-6 bg-gray-300 hover:bg-pink-500 text-black mt-6 flex items-center justify-center gap-2"
+            disabled={
+              !selectedColor ||
+              (selectedSize !== "36 a 40" && selectedSize !== "40 a 44")
+            }
+          >
+            <ShoppingBag className="h-5 w-5" />
+            Acheter maintenant
           </Button>
 
           {/* Additional Info */}
@@ -243,7 +319,7 @@ export default function ProductPage({ params }: { params: { id: string } }) {
               <div>
                 <h4 className="font-medium mb-1">Shipping</h4>
                 <p className="text-gray-600">
-                  Livraison gratuite pour les commandes plus de 5000da
+                  Livraison gratuite pour les commandes plus de 5000 DA
                 </p>
               </div>
               <div>

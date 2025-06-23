@@ -76,7 +76,7 @@ export function Cart() {
                           <X className="h-4 w-4" />
                         </button>
                       </div>
-                      <p className="mt-1 text-base">${item.price.toFixed(2)}</p>
+                      <p className="mt-1 text-base">{item.price} DA</p>
                       <div className="mt-2 flex items-center border rounded-md w-fit">
                         <button
                           onClick={() => updateQuantity(item.id, -1)}
@@ -104,10 +104,10 @@ export function Cart() {
               <div className="border-t pt-4">
                 <div className="flex justify-between text-base">
                   <span>Subtotal</span>
-                  <span>${subtotal.toFixed(2)}</span>
+                  <span>{subtotal} DA</span>
                 </div>
                 <p className="mt-1 text-sm text-neutral-500">
-                  Shipping and taxes calculated at checkout
+                  Plus les frais de livraison
                 </p>
               </div>
 
@@ -117,7 +117,7 @@ export function Cart() {
                     className="w-full bg-[#5a8575] hover:bg-[#4a7265] text-white py-3 rounded-none"
                     onClick={() => setIsOpen(false)}
                   >
-                    Checkout
+                    Valider la commande
                   </button>
                 </Link>
                 <Link href="/cart" className="w-full">
@@ -125,7 +125,7 @@ export function Cart() {
                     className="w-full border border-neutral-200 hover:bg-neutral-50 py-3"
                     onClick={() => setIsOpen(false)}
                   >
-                    View Basket
+                    Voir le panier
                   </button>
                 </Link>
               </div>

@@ -14,8 +14,11 @@ export default function HeroSection() {
           unique models to make sure you&apos;ll shine!
         </p>
         <Link href="/products">
-          <Button className="font-sans bg-pink-700 rounded-none" size="lg">
-            SHOP NOW
+          <Button
+            className="font-sans bg-pink-700 rounded-none text-white"
+            size="lg"
+          >
+            Découvrez nos produits
           </Button>
         </Link>
       </div>

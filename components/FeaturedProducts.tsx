@@ -16,6 +16,7 @@ export interface Product {
   id: string;
   documentId: string;
   price: number;
+  old_price: number;
   title: string;
   image: string;
   banner: { url: string };
@@ -32,6 +33,7 @@ export default function FeaturedProducts({ title }: { title: string }) {
       try {
         const response = await getProducts();
         if (response.data) {
+          console.log(response.data);
           setProducts(
             response.data
               .map((product: Product) => ({
@@ -41,7 +43,7 @@ export default function FeaturedProducts({ title }: { title: string }) {
                 image: product.banner.url,
                 documentId: product.documentId,
                 category: "Ensemble",
-                old_price: product.price * 2,
+                old_price: product.old_price,
                 isNew: true,
               }))
               .reverse()
@@ -58,7 +60,7 @@ export default function FeaturedProducts({ title }: { title: string }) {
   }, []);
 
   return (
-    <section className="pt-10 px-4 md:px-6 bg-gray-50 ">
+    <section className="pt-10 px-4 md:px-6">
       <div className="container mx-auto">
         <div className="flex items-center justify-between mb-10">
           <h2 className="text-2xl font-light tracking-wide uppercase relative after:content-[''] after:absolute after:w-12 after:h-0.5 after:bg-pink-700 after:-bottom-3 after:left-0">
@@ -68,7 +70,7 @@ export default function FeaturedProducts({ title }: { title: string }) {
             href={"/products"}
             className="flex items-center text-sm font-medium text-pink-700 hover:text-pink-900 transition-colors group"
           >
-            View all
+            Voir tous les produits
             <ChevronRight className="ml-1 h-4 w-4 group-hover:translate-x-1 transition-transform" />
           </Link>
         </div>

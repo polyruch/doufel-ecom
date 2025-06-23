@@ -1,8 +1,19 @@
 "use client";
 
+import { Metadata } from "next";
 import { useCart } from "@/contexts/CartContext";
 import { Minus, Plus, X } from "lucide-react";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Panier | Dfl-collection Boutique",
+  description:
+    "Consultez votre panier d'achats et procédez au paiement en toute sécurité.",
+  robots: {
+    index: false,
+    follow: true,
+  },
+};
 
 export default function CartPage() {
   const { items, updateQuantity, removeItem, totalItems, subtotal } = useCart();
@@ -61,7 +72,7 @@ export default function CartPage() {
                   </p>
                 )}
                 <p className="mt-1 text-sm text-neutral-500 md:hidden">
-                  ${item.price.toFixed(2)}
+                  {item.price} DA
                 </p>
               </div>
             </div>
@@ -90,9 +101,7 @@ export default function CartPage() {
             </div>
 
             {/* Price */}
-            <div className="text-right">
-              ${(item.price * item.quantity).toFixed(2)}
-            </div>
+            <div className="text-right">{item.price * item.quantity} DA</div>
 
             {/* Remove button */}
             <div>
@@ -116,7 +125,7 @@ export default function CartPage() {
             <div className="space-y-2">
               <div className="flex justify-between">
                 <span>Subtotal ({totalItems} items)</span>
-                <span>${subtotal.toFixed(2)}</span>
+                <span>{subtotal} DA</span>
               </div>
               <div className="flex justify-between">
                 <span>Shipping</span>
@@ -124,7 +133,7 @@ export default function CartPage() {
               </div>
               <div className="pt-2 mt-2 border-t flex justify-between font-medium">
                 <span>Total</span>
-                <span>${subtotal.toFixed(2)}</span>
+                <span>{subtotal} DA</span>
               </div>
             </div>
             <div className="mt-6">

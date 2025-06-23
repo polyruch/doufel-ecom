@@ -1,8 +1,28 @@
 "use client";
+import { Metadata } from "next";
 import { getProducts } from "@/utils/axiosClient";
 import { useEffect, useState } from "react";
 import { ProductCard } from "@/components/ui/ProductCard";
 import { Product } from "@/components/FeaturedProducts";
+
+export const metadata: Metadata = {
+  title: "Nos Produits | Dfl-collection Boutique",
+  description:
+    "Explorez notre collection complète de vêtements modernes pour femmes. Des designs uniques, des matériaux de qualité et des styles pour toutes les occasions.",
+  openGraph: {
+    title: "Nos Produits | Dfl-collection Boutique",
+    description:
+      "Explorez notre collection complète de vêtements modernes pour femmes. Des designs uniques, des matériaux de qualité et des styles pour toutes les occasions.",
+    images: [
+      {
+        url: "/products-og.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Collection Dfl - Catalogue Complet",
+      },
+    ],
+  },
+};
 
 export default function ProductsPage() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -41,10 +61,10 @@ export default function ProductsPage() {
       <div className="container mx-auto mt-5">
         <div className="mb-10">
           <h1 className="text-3xl font-light tracking-wide uppercase relative after:content-[''] after:absolute after:w-12 after:h-0.5 after:bg-pink-700 after:-bottom-3 after:left-0">
-            All Products
+            Tous les produits
           </h1>
           <p className="text-sm text-gray-600 mt-6">
-            Discover our collection of high-quality women&apos;s clothing
+            Découvrez notre collection de vêtements de qualité
           </p>
         </div>
 

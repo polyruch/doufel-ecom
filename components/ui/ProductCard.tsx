@@ -10,6 +10,7 @@ interface Product {
   price: number;
   image: string;
   isNew?: boolean;
+  old_price: number;
 }
 
 interface ProductCardProps {
@@ -24,7 +25,8 @@ export function ProductCard({ product }: ProductCardProps) {
           <Image
             src={product.image || "/placeholder.svg"}
             alt={product.title}
-            fill
+            height={400}
+            width={400}
             className="object-cover transition-transform hover:scale-105"
           />
           <div className="absolute top-2 right-2">
@@ -48,9 +50,11 @@ export function ProductCard({ product }: ProductCardProps) {
             {product.title}
           </h3>
           <div className="flex items-center gap-2">
-            <p className="font-medium text-sm">${product.price.toFixed(2)}</p>
+            <p className="font-medium text-sm font-black font-sans">
+              {product.price} DA
+            </p>
             <p className="text-xs text-muted-foreground line-through">
-              ${(product.price * 1.3).toFixed(2)}
+              {product.old_price} DA
             </p>
           </div>
         </CardContent>
@@ -60,7 +64,7 @@ export function ProductCard({ product }: ProductCardProps) {
             size="sm"
             className="w-full text-xs hover:bg-pink-700 hover:text-white hover:border-pink-700 transition-colors "
           >
-            Add to Cart
+            Acheter
           </Button>
         </CardFooter>
       </Card>
