@@ -33,7 +33,6 @@ export default function FeaturedProducts({ title }: { title: string }) {
       try {
         const response = await getProducts();
         if (response.data) {
-          console.log(response.data);
           setProducts(
             response.data
               .map((product: Product) => ({
