@@ -5,25 +5,6 @@ import { useEffect, useState } from "react";
 import { ProductCard } from "@/components/ui/ProductCard";
 import { Product } from "@/components/FeaturedProducts";
 
-export const metadata: Metadata = {
-  title: "Nos Produits | Dfl-collection Boutique",
-  description:
-    "Explorez notre collection complète de vêtements modernes pour femmes. Des designs uniques, des matériaux de qualité et des styles pour toutes les occasions.",
-  openGraph: {
-    title: "Nos Produits | Dfl-collection Boutique",
-    description:
-      "Explorez notre collection complète de vêtements modernes pour femmes. Des designs uniques, des matériaux de qualité et des styles pour toutes les occasions.",
-    images: [
-      {
-        url: "/products-og.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Collection Dfl - Catalogue Complet",
-      },
-    ],
-  },
-};
-
 export default function ProductsPage() {
   const [products, setProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(true);

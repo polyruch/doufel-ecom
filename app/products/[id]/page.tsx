@@ -30,52 +30,6 @@ interface ProductData {
   old_price: number;
 }
 
-export async function generateMetadata({
-  params,
-}: {
-  params: { id: string };
-}): Promise<Metadata> {
-  try {
-    const product = await getProduct(params.id);
-    const productImage = product.banner?.url || "/product-placeholder.jpg";
-
-    return {
-      title: `${product.title} | Dfl-collection Boutique`,
-      description:
-        product.description?.[0]?.children?.[0]?.text ||
-        "Découvrez ce produit unique de notre collection.",
-      openGraph: {
-        title: `${product.title} | Dfl-collection Boutique`,
-        description:
-          product.description?.[0]?.children?.[0]?.text ||
-          "Découvrez ce produit unique de notre collection.",
-        images: [
-          {
-            url: productImage,
-            width: 1200,
-            height: 630,
-            alt: product.title,
-          },
-        ],
-      },
-      twitter: {
-        card: "summary_large_image",
-        title: `${product.title} | Dfl-collection Boutique`,
-        description:
-          product.description?.[0]?.children?.[0]?.text ||
-          "Découvrez ce produit unique de notre collection.",
-        images: productImage,
-      },
-    };
-  } catch (error) {
-    return {
-      title: "Produit | Dfl-collection Boutique",
-      description:
-        "Découvrez notre collection de vêtements modernes pour femmes.",
-    };
-  }
-}
-
 export default function ProductPage({ params }: { params: { id: string } }) {
   const [product, setProduct] = useState<ProductData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
