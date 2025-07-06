@@ -20,15 +20,6 @@ interface FormData {
   phone: string;
 }
 
-export const metadata: Metadata = {
-  title: "Paiement | Dfl-collection Boutique",
-  description: "Finalisez votre commande en toute sécurité sur Dfl-collection.",
-  robots: {
-    index: false,
-    follow: true,
-  },
-};
-
 export default function CheckoutPage() {
   const { items, updateQuantity, removeItem, subtotal, totalItems, clearCart } =
     useCart();
