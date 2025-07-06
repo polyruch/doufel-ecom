@@ -3,8 +3,9 @@ import { Check, Package, Truck, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useSearchParams, useRouter } from "next/navigation";
+import { Suspense } from "react";
 
-export default function SuccessPage() {
+function SuccessContent() {
   const params = useSearchParams();
   const router = useRouter();
   const orderId = params.get("orderId") || "-";
@@ -143,5 +144,19 @@ export default function SuccessPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function SuccessPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+          Loading...
+        </div>
+      }
+    >
+      <SuccessContent />
+    </Suspense>
   );
 }
