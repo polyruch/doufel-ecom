@@ -5,16 +5,6 @@ import { useCart } from "@/contexts/CartContext";
 import { Minus, Plus, X } from "lucide-react";
 import Link from "next/link";
 
-export const metadata: Metadata = {
-  title: "Panier | Dfl-collection Boutique",
-  description:
-    "Consultez votre panier d'achats et procédez au paiement en toute sécurité.",
-  robots: {
-    index: false,
-    follow: true,
-  },
-};
-
 export default function CartPage() {
   const { items, updateQuantity, removeItem, totalItems, subtotal } = useCart();
 
