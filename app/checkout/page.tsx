@@ -1,13 +1,12 @@
 "use client";
 
-import { Metadata } from "next";
 import { useState } from "react";
 import { useCart } from "@/contexts/CartContext";
-import { Minus, Plus, X } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { wilayas } from "@/utils/constants";
 import { createOrder } from "@/utils/axiosClient";
+import Image from "next/image";
 
 type CheckoutStep = "information" | "shipping" | "confirmation";
 
@@ -21,8 +20,7 @@ interface FormData {
 }
 
 export default function CheckoutPage() {
-  const { items, updateQuantity, removeItem, subtotal, totalItems, clearCart } =
-    useCart();
+  const { items, subtotal, clearCart } = useCart();
   const [currentStep, setCurrentStep] = useState<CheckoutStep>("information");
   const [formData, setFormData] = useState<FormData>({
     nom: "",
@@ -125,7 +123,7 @@ export default function CheckoutPage() {
         <div className="text-center">
           <h1 className="text-3xl mb-6">Your cart is empty</h1>
           <p className="mb-8 text-neutral-600">
-            Looks like you haven't added any items to your cart yet.
+            Looks like you haven&apos;t added any items to your cart yet.
           </p>
           <Link href="/">
             <button className="bg-[#5a8575] hover:bg-[#4a7265] text-white px-8 py-3">
@@ -393,7 +391,7 @@ export default function CheckoutPage() {
                 </p>
                 <Link href="/">
                   <button className="bg-[#5a8575] hover:bg-[#4a7265] text-white px-8 py-3">
-                    Retour à l'accueil
+                    Retour à l&apos;accueil
                   </button>
                 </Link>
               </div>
@@ -410,7 +408,7 @@ export default function CheckoutPage() {
               {items.map((item) => (
                 <div key={item.id} className="flex py-4 border-b">
                   <div className="relative h-20 w-16 flex-shrink-0 overflow-hidden rounded-md border border-neutral-200 mr-4">
-                    <img
+                    <Image
                       src={item.image || "/placeholder.svg"}
                       alt={item.name}
                       className="h-full w-full object-cover"

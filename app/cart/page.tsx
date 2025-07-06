@@ -1,9 +1,8 @@
 "use client";
-
-import { Metadata } from "next";
 import { useCart } from "@/contexts/CartContext";
 import { Minus, Plus, X } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function CartPage() {
   const { items, updateQuantity, removeItem, totalItems, subtotal } = useCart();
@@ -14,7 +13,7 @@ export default function CartPage() {
         <div className="text-center">
           <h1 className="text-3xl mb-6">Your cart is empty</h1>
           <p className="mb-8 text-neutral-600">
-            Looks like you haven't added any items to your cart yet.
+            Looks like you haven&apos;t added any items to your cart yet.
           </p>
           <Link href="/">
             <button className="bg-[#5a8575] hover:bg-[#4a7265] text-white px-8 py-3">
@@ -48,7 +47,7 @@ export default function CartPage() {
             {/* Product info */}
             <div className="flex items-center gap-4">
               <div className="h-24 w-20 flex-shrink-0 overflow-hidden rounded-md border border-neutral-200">
-                <img
+                <Image
                   src={item.image || "/placeholder.svg"}
                   alt={item.name}
                   className="h-full w-full object-cover"

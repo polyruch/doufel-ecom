@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { X, Minus, Plus, WholeWord } from "lucide-react";
+import { X, Minus, Plus } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
 import {
   DropdownMenu,
@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { ShoppingBag } from "lucide-react";
 import { useState } from "react";
+import Image from "next/image";
 
 export function Cart() {
   const {
@@ -60,7 +61,7 @@ export function Cart() {
                 {basketItems.map((item) => (
                   <div key={item.id} className="flex items-start gap-4">
                     <div className="h-20 w-16 flex-shrink-0 overflow-hidden rounded-md border border-neutral-200">
-                      <img
+                      <Image
                         src={item.image || "/placeholder.svg"}
                         alt={item.name}
                         className="h-full w-full object-cover"

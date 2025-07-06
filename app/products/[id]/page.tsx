@@ -1,10 +1,9 @@
 "use client";
-import { Metadata } from "next";
 import { getProduct } from "@/utils/axiosClient";
 import { useEffect, useState, use } from "react";
 import * as React from "react";
 import { Button } from "@/components/ui/button";
-import { Minus, Plus, ShoppingBag } from "lucide-react";
+import { ShoppingBag } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -14,8 +13,6 @@ import {
   CarouselApi,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
 } from "@/components/ui/carousel";
 import ColorPicker from "@/components/ui/colorPicker";
 import QuantitySelector from "@/components/ui/quantitySelector";
@@ -43,7 +40,7 @@ export default function ProductPage({ params }: { params: { id: string } }) {
 
   const sizes = ["36 a 40", "40 a 44"];
 
-  // @ts-ignore
+  // @ts-expect-error// use of use hook in server component
   const { id } = use(params);
   useEffect(() => {
     const fetchProduct = async () => {

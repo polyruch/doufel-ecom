@@ -1,8 +1,4 @@
-import {
-  Cormorant_Garamond,
-  Marcellus,
-  Playfair_Display,
-} from "next/font/google";
+import { Cormorant_Garamond, Marcellus } from "next/font/google";
 import "./globals.css";
 import Footer from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
@@ -13,11 +9,11 @@ const marcellus = Marcellus({
   subsets: ["latin"],
 });
 
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  variable: "--font-playfair",
-});
+// const playfair = Playfair_Display({
+//   subsets: ["latin"],
+//   weight: ["400", "500", "600"],
+//   variable: "--font-playfair",
+// });
 
 // Load Cormorant Garamond font
 const cormorant = Cormorant_Garamond({

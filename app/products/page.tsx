@@ -1,5 +1,4 @@
 "use client";
-import { Metadata } from "next";
 import { getProducts } from "@/utils/axiosClient";
 import { useEffect, useState } from "react";
 import { ProductCard } from "@/components/ui/ProductCard";
