@@ -38,42 +38,13 @@ export function Navbar() {
           </div>
 
           {/* Desktop navigation - hidden on mobile */}
-          <nav className="hidden lg:flex lg:flex-1 lg:justify-center">
-            <ul className="flex space-x-8">
-              <li>
-                <Link
-                  href="/new-collection"
-                  className="text-neutral-800 hover:text-[#5a8575]"
-                >
-                  New Collection
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/ensemble"
-                  className="text-neutral-800 hover:text-[#5a8575]"
-                >
-                  Ensemble
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/robe"
-                  className="text-neutral-800 hover:text-[#5a8575]"
-                >
-                  Robe
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/veste"
-                  className="text-neutral-800 hover:text-[#5a8575]"
-                >
-                  Veste
-                </Link>
-              </li>
+          {/* <nav className="hidden lg:flex lg:flex-1 lg:justify-center">
+            <ul className="flex space-between">
+              <Link href={"/about"}>
+                <li>DFL-collection</li>
+              </Link>
             </ul>
-          </nav>
+          </nav> */}
 
           {/* Search and cart */}
           <div className="flex items-center space-x-4">
@@ -103,38 +74,11 @@ export function Navbar() {
           <ul className="space-y-6">
             <li>
               <Link
-                href="/new-collection"
+                href="/about"
                 className="text-xl font-medium text-neutral-800 hover:text-[#5a8575]"
                 onClick={() => setIsMenuOpen(false)}
               >
-                New Collection
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/ensemble"
-                className="text-xl font-medium text-neutral-800 hover:text-[#5a8575]"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Ensemble
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/robe"
-                className="text-xl font-medium text-neutral-800 hover:text-[#5a8575]"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Robe
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/veste"
-                className="text-xl font-medium text-neutral-800 hover:text-[#5a8575]"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Veste
+                DFL-collection ❤️
               </Link>
             </li>
           </ul>

@@ -62,6 +62,8 @@ export function Cart() {
                   <div key={item.id} className="flex items-start gap-4">
                     <div className="h-20 w-16 flex-shrink-0 overflow-hidden rounded-md border border-neutral-200">
                       <Image
+                        width={50}
+                        height={50}
                         src={item.image || "/placeholder.svg"}
                         alt={item.name}
                         className="h-full w-full object-cover"

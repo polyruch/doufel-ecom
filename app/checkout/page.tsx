@@ -409,6 +409,7 @@ export default function CheckoutPage() {
                 <div key={item.id} className="flex py-4 border-b">
                   <div className="relative h-20 w-16 flex-shrink-0 overflow-hidden rounded-md border border-neutral-200 mr-4">
                     <Image
+                      fill
                       src={item.image || "/placeholder.svg"}
                       alt={item.name}
                       className="h-full w-full object-cover"
@@ -424,6 +425,11 @@ export default function CheckoutPage() {
                         {item.price * item.quantity} DA
                       </span>
                     </div>
+                    <p className="text-xs text-neutral-500">
+                      {item.size
+                        ? `Taille: ${item.size}`
+                        : "Taille non spécifiée"}
+                    </p>
                     {item.color && (
                       <div className="mt-1 flex items-center gap-2">
                         <div

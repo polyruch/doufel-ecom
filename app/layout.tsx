@@ -68,16 +68,6 @@ export const metadata = {
       "max-snippet": -1,
     },
   },
-  twitter: {
-    card: "summary_large_image",
-    title: "Dfl-collection Boutique",
-    description:
-      "Découvrez notre collection exclusive de vêtements modernes pour femmes.",
-    images: ["/og-image.jpg"],
-  },
-  verification: {
-    google: "your-google-verification-code", // Add your Google verification code
-  },
 };
 
 export default function RootLayout({

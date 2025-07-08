@@ -1,4 +1,5 @@
 "use client";
+
 import { getProduct } from "@/utils/axiosClient";
 import { useEffect, useState, use } from "react";
 import * as React from "react";
@@ -10,7 +11,7 @@ import { useRouter } from "next/navigation";
 import { useCart } from "@/contexts/CartContext";
 import {
   Carousel,
-  CarouselApi,
+  type CarouselApi,
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel";
@@ -37,11 +38,12 @@ export default function ProductPage({ params }: { params: { id: string } }) {
   const [carouselApi, setCarouselApi] = React.useState<CarouselApi>();
   const [selectedSize, setSelectedSize] = useState<string>("");
   const router = useRouter();
+  const sizes = [36, 38, 40, 42];
 
-  const sizes = ["36 a 40", "40 a 44"];
-
-  // @ts-expect-error// use of use hook in server component
+  // @ts-expect-error
+  // use of use hook in server component
   const { id } = use(params);
+
   useEffect(() => {
     const fetchProduct = async () => {
       try {
@@ -80,6 +82,7 @@ export default function ProductPage({ params }: { params: { id: string } }) {
     };
 
     carouselApi.on("select", onSelect);
+
     // Call once to set initial slide
     onSelect();
 
@@ -210,21 +213,30 @@ export default function ProductPage({ params }: { params: { id: string } }) {
           <div className="prose prose-sm max-w-none">
             <p>{product.description}</p>
           </div>
+
           {/* Size Selection */}
-          <div className="border-2 border-black rounded-md p-4">
-            <select
-              id="size"
-              value={selectedSize}
-              onChange={(e) => setSelectedSize(e.target.value)}
-            >
-              <option value="">Choisir Une Taille</option>
+          <div className="space-y-3">
+            <h3 className="text-sm font-medium">Taille</h3>
+            <div className="flex gap-2 flex-wrap">
               {sizes.map((size) => (
-                <option key={size} value={size}>
+                <Button
+                  key={size}
+                  variant={
+                    selectedSize === size.toString() ? "default" : "outline"
+                  }
+                  onClick={() => setSelectedSize(size.toString())}
+                  className={`px-4 py-2 min-w-[60px] ${
+                    selectedSize === size.toString()
+                      ? "bg-black text-white border-black"
+                      : "bg-white text-black border-gray-300 hover:border-black"
+                  }`}
+                >
                   {size}
-                </option>
+                </Button>
               ))}
-            </select>
+            </div>
           </div>
+
           {/* Color Selection */}
           {product.colors && product.colors.length > 0 && (
             <ColorPicker
@@ -240,25 +252,21 @@ export default function ProductPage({ params }: { params: { id: string } }) {
             incrementQuantity={incrementQuantity}
             quantity={quantity}
           />
+
           {/* Add to Cart Button */}
           <Button
             onClick={handleAddToCart}
             className="w-full md:w-auto px-8 py-6 bg-pink-700 hover:bg-pink-800 text-white mt-6 flex items-center justify-center gap-2"
-            disabled={
-              !selectedColor ||
-              (selectedSize !== "36 a 40" && selectedSize !== "40 a 44")
-            }
+            disabled={!selectedColor || selectedSize == ""}
           >
             <ShoppingBag className="h-5 w-5" />
             Ajouter au panier
           </Button>
+
           <Button
             onClick={handleBuyNow}
-            className="w-full md:w-auto px-8 py-6 bg-gray-300 hover:bg-pink-500 text-black mt-6 flex items-center justify-center gap-2"
-            disabled={
-              !selectedColor ||
-              (selectedSize !== "36 a 40" && selectedSize !== "40 a 44")
-            }
+            className="w-full md:w-auto px-8 py-6 bg-gray-300 hover:bg-pink-200 text-black mt-6 flex items-center justify-center gap-2"
+            disabled={!selectedColor || selectedSize == ""}
           >
             <ShoppingBag className="h-5 w-5" />
             Acheter maintenant

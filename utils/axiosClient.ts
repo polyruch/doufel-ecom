@@ -16,6 +16,7 @@ export default api;
 export async function getBanner() {
   try {
     const response = await api.get("/banner?populate[Image][fields]=url");
+
     return response.data;
   } catch (error) {
     console.error("Error fetching banner:", error);
